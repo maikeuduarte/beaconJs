@@ -11,9 +11,13 @@ angular.module('starter.controllers', [])
         title: 'ionicPlatform'
       });
 
-      $cordovaBeacon.requestAlwaysAuthorization();
+      $cordovaBeacon.requestWhenInUseAuthorization();
 
       $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function (event, pluginResult) {
+        $ionicPopup.alert({
+          title: 'chama evento'
+        });
+
         var uniqueBeaconKey;
         for (var i = 0; i < pluginResult.beacons.length; i++) {
           uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
@@ -21,13 +25,13 @@ angular.module('starter.controllers', [])
 
           $ionicPopup.alert({
             title: 'Key',
-            template: 'Key:'+uniqueBeaconKey
+            template: 'Key:' + uniqueBeaconKey
           });
         }
         $scope.$apply();
       });
 
-      $cordovaBeacon.startMonitoringForRegion($cordovaBeacon.createBeaconRegion("cec1db049d41", "B9407F30-F5F8-466E-AFF9-25556B57FE6D"));
+      $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion("cec1db049d41", "B9407F30-F5F8-466E-AFF9-25556B57FE6D"));
       $rootScope.apply();
     });
 
