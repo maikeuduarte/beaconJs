@@ -5,6 +5,7 @@
 node_modules/
 $RECYCLE.BIN/
 
+.vscode/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
