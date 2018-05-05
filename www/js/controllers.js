@@ -2,10 +2,16 @@ angular.module('starter.controllers', [])
 
   .controller('DashCtrl', function ($scope, $rootScope, $ionicPlatform, $cordovaBeacon, $ionicPopup) {
     $scope.beacons = {};
+    $ionicPopup.alert({
+      title: 'DashCtrl'
+    });
 
     $ionicPlatform.ready(function () {
+      $ionicPopup.alert({
+        title: 'ionicPlatform'
+      });
 
-      $cordovaBeacon.requestWhenInUseAuthorization();
+      $cordovaBeacon.requestAlwaysAuthorization();
 
       $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function (event, pluginResult) {
         var uniqueBeaconKey;
@@ -21,7 +27,7 @@ angular.module('starter.controllers', [])
         $scope.$apply();
       });
 
-      $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion("cec1db049d41", "B9407F30-F5F8-466E-AFF9-25556B57FE6D"));
+      $cordovaBeacon.startMonitoringForRegion($cordovaBeacon.createBeaconRegion("cec1db049d41", "B9407F30-F5F8-466E-AFF9-25556B57FE6D"));
 
     });
 
